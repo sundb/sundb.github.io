@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>如何优雅解决egret请求http的跨域问题 | Coding Dog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 如何解决 使用npm安装http-proxy  1npm install -g http-proxy  修改egret的启动服务脚本  mac上脚本目录: /Users/YOUR NAME/Library/Application\ Support/Egret/engine">
+  <meta name="description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 解决方案 egret使用node的http server来处理h5的加载,熟悉node同学都知道如何在node中对消息进行转发,只要能解决egret的消息转发,就解决了跨域问题  如何解决egret可以在命令行和gui两种模式下进行服务的启动,但最终调用的命令都是egre">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何优雅解决egret请求http的跨域问题">
 <meta property="og:url" content="http://yoursite.com/2017/08/14/cors-in-egret/index.html">
 <meta property="og:site_name" content="Coding Dog">
-<meta property="og:description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 如何解决 使用npm安装http-proxy  1npm install -g http-proxy  修改egret的启动服务脚本  mac上脚本目录: /Users/YOUR NAME/Library/Application\ Support/Egret/engine">
-<meta property="og:updated_time" content="2017-08-29T15:52:22.000Z">
+<meta property="og:description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 解决方案 egret使用node的http server来处理h5的加载,熟悉node同学都知道如何在node中对消息进行转发,只要能解决egret的消息转发,就解决了跨域问题  如何解决egret可以在命令行和gui两种模式下进行服务的启动,但最终调用的命令都是egre">
+<meta property="og:updated_time" content="2017-08-30T07:00:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅解决egret请求http的跨域问题">
-<meta name="twitter:description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 如何解决 使用npm安装http-proxy  1npm install -g http-proxy  修改egret的启动服务脚本  mac上脚本目录: /Users/YOUR NAME/Library/Application\ Support/Egret/engine">
+<meta name="twitter:description" content="碰到的问题使用nginx可以很容易解决egret请求http的跨域问题但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题 解决方案 egret使用node的http server来处理h5的加载,熟悉node同学都知道如何在node中对消息进行转发,只要能解决egret的消息转发,就解决了跨域问题  如何解决egret可以在命令行和gui两种模式下进行服务的启动,但最终调用的命令都是egre">
   
     <link rel="alternative" href="/atom.xml" title="Coding Dog" type="application/atom+xml">
   
@@ -162,26 +162,51 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="碰到的问题"><a href="#碰到的问题" class="headerlink" title="碰到的问题"></a>碰到的问题</h2><p>使用nginx可以很容易解决egret请求http的跨域问题<br>但是在开发阶段,如果需要调试或者断点,就会出现跨域的问题</p>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><ol>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>egret使用node的http server来处理h5的加载,熟悉node同学都知道如何在node中对消息进行转发,只要能解决egret的消息转发,就解决了跨域问题</li>
+</ul>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>egret可以在命令行和gui两种模式下进行服务的启动,但最终调用的命令都是egret startserver</p>
+<h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><ul>
 <li>使用npm安装http-proxy</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g http-proxy</div></pre></td></tr></table></figure>
-<ol>
-<li>修改egret的启动服务脚本</li>
-</ol>
-<p>mac上脚本目录: /Users/YOUR NAME/Library/Application\ Support/Egret/engine/5.0.6/tools/server/server.js</p>
-<ul>
-<li>在顶部加入</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var httpProxy = require(&apos;http-proxy&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g http-proxy</div></pre></td></tr></table></figure>
 <ul>
-<li><p>增加proxy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var proxy = httpProxy.createProxyServer(&#123;</div><div class="line">    target: &apos;http://192.168.10.38:8180/&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改转发</p>
-</li>
+<li>修改egret的命令行启动服务脚本</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var server = http.createServer(function (request, response) &#123;</div><div class="line">  // 在些处对/api/的地址进行转发,修改成你需转换的地址验证</div><div class="line">  if (/\/api\/.*$/.test(request.url)) &#123;</div><div class="line">    console.log(123);</div><div class="line">    proxy.web(request, response);</div><div class="line">    return;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</div><div class="line">  m(request, response).then(function () &#123;</div><div class="line">    response.end();</div><div class="line">  &#125;).catch(function (e) &#123;</div><div class="line">    console.error(e);</div><div class="line">    response.end();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>mac上脚本路径: /Users/YOUR NAME/Library/Application\ Support/Egret/engine/5.0.6/tools/server/server.js</p>
+<p>在顶部加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> httpProxy = <span class="built_in">require</span>(<span class="string">'http-proxy'</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>增加proxy</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = httpProxy.createProxyServer(&#123;</div><div class="line">    target: <span class="string">'http://192.168.10.38:8180/'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>修改转发</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</div><div class="line">  <span class="comment">// 在些处对/api/的地址进行转发,修改成你需转换的地址验证</span></div><div class="line">  <span class="keyword">if</span> (<span class="regexp">/\/api\/.*$/</span>.test(request.url)) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">123</span>);</div><div class="line">    proxy.web(request, response);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  response.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</div><div class="line">  m(request, response).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    response.end();</div><div class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.error(e);</div><div class="line">    response.end();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="gui模式"><a href="#gui模式" class="headerlink" title="gui模式"></a>gui模式</h3><ul>
+<li>修改启动脚本<br>mac上脚本路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Egret\ Wing\ 3.app/Contents/Resources/app/extensions/http-server/server.js</div></pre></td></tr></table></figure>
+<p>在顶部加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> httpProxy = <span class="built_in">require</span>(<span class="string">'http-proxy'</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>在http-server这级目录执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install http-proxy --save</div></pre></td></tr></table></figure>
+<ul>
+<li>增加proxy</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = httpProxy.createProxyServer(&#123;</div><div class="line">    target: <span class="string">'http://192.168.10.38:8180/'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>修改server启动脚本<br>该原有的代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var server = connect()</div><div class="line">  .use(serveStatic(config.root))</div><div class="line">  .listen(config.port, &apos;0.0.0.0&apos;, function (err) &#123;</div><div class="line">    config.error = undefined;</div><div class="line">    ss(server);</div><div class="line">  &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var server = connect()</div><div class="line">  .use(serveStatic(config.root))</div><div class="line">  .use(function(req, res)&#123;</div><div class="line">    proxy.web(req, res);</div><div class="line">  &#125;)</div><div class="line">  .listen(config.port, &apos;0.0.0.0&apos;, function (err) &#123;</div><div class="line">    config.error = undefined;</div><div class="line">    ss(server);</div><div class="line">  &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>重启egret wing</p>
+<h3 id="吐槽egret"><a href="#吐槽egret" class="headerlink" title="吐槽egret"></a>吐槽egret</h3><p>明明可以一个app解决的事,你要分成10几个app,好玩吗?<br>通过打log研究了下egret的launcher和wing,两个app耦合度如此之高,互相调,瞎了我的狗眼,什么傻逼玩意</p>
+
       
 
       
