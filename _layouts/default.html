@@ -1,42 +1,68 @@
----
----
-
-<!doctype html>
-<!--
-  Minimal Mistakes Jekyll Theme 4.17.2 by Michael Rose
-  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
-  Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    {% include head.html %}
-    {% include head/custom.html %}
+    {%- include head.html -%}
   </head>
+  <body>
+    <main class="container">
+      <section class="about">
+        <a href="/"><img src="{{ "/assets/portfolio.png" | relative_url }}" alt="{{ site.plainwhite.name }}"></a>
+        <h2 id="title">
+          <a href="/">{{ site.plainwhite.name }}</a>
+        </h2>
+        <p class="tagline">{{ site.plainwhite.tagline }}</p>
+        <ul class="social">
+          {%- if site.plainwhite.social_links.github -%}
+            <a href="https://github.com/{{ site.plainwhite.social_links.github }}">
+              <li>
+                <i class="icon-github-circled"></i>
+              </li>
+            </a>
+          {%- endif -%}
+          {%- if site.plainwhite.social_links.linkedIn -%}
+            <a href="https://www.linkedin.com/{{ site.plainwhite.social_links.linkedIn }}">
+              <li>
+                <i class="icon-linkedin-squared"></i>
+              </li>
+            </a>
+          {%- endif -%}
+          {%- if site.plainwhite.social_links.twitter -%}
+            <a href="https://twitter.com/{{ site.plainwhite.social_links.twitter }}">
+              <li>
+                <i class="icon-twitter-squared"></i>
+              </li>
+            </a>
+          {%- endif -%}
+        </ul>
 
-  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
-    {% include_cached skip-links.html %}
-    {% include_cached browser-upgrade.html %}
-    {% include_cached masthead.html %}
+        {%- if site.plainwhite.navigation -%}
+          <nav class="navigation">
+            <ul>
+              {% for link in site.plainwhite.navigation %}
+                <li>
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {%- endif -%}
 
-    <div class="initial-content">
-      {{ content }}
-    </div>
+        <p>&copy;
+          {{ "now" | date: "%Y" }}</p>
+      </section>
+      <section class="content">
+        {{ content }}
+      </section>
+    </main>
+    {%- if site.plainwhite.analytics_id -%}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.plainwhite.analytics_id }}"></script>
+      <script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-    {% if site.search == true %}
-      <div class="search-content">
-        {% include_cached search/search_form.html %}
-      </div>
-    {% endif %}
-
-    <div id="footer" class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include_cached footer.html %}
-      </footer>
-    </div>
-
-    {% include scripts.html %}
-
+		gtag('config', '{{ site.plainwhite.analytics_id }}');
+	</script>
+    {%- endif -%}
   </body>
 </html>
