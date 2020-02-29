@@ -13,4 +13,3 @@ Gemfile.lock
 node_modules
 npm-debug.log*
 vendor/bundle
-_site/
