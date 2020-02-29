@@ -2,9 +2,8 @@
 layout: post
 title: "19本推荐的编程书籍"
 date: 2020-02-28
-categories: Books Programmer
+categories: Books
 tags: 
-toc: true
 ---
 互联网上总是有无数的列表声称自己是必读的编程书籍的清单, 寻找好的资源来学习编程是很困难的事情.
 每个人对于哪些书是最好的书都有自己的看法, 但我认识总会有一些书会出现在所有的"最佳编程书"里.

@@ -4,7 +4,6 @@ PATH
     plainwhite (0.9)
       jekyll (>= 3.7.3)
       jekyll-seo-tag (>= 2.1.0)
-      jekyll-toc
 
 GEM
   remote: https://rubygems.org/
@@ -41,9 +40,6 @@ GEM
       sassc (> 2.0.1, < 3.0)
     jekyll-seo-tag (2.6.1)
       jekyll (>= 3.3, < 5.0)
-    jekyll-toc (0.13.1)
-      jekyll (>= 3.7)
-      nokogiri (~> 1.9)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     kramdown (2.1.0)
@@ -54,9 +50,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.3.6)
-    mini_portile2 (2.4.0)
-    nokogiri (1.10.8)
-      mini_portile2 (~> 2.4.0)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (4.0.3)
