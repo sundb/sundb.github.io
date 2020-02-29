@@ -69,7 +69,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (> 1.16)
+  bundler (> 1.14.6)
   plainwhite!
   rake (~> 12.0)
 
